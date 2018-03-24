@@ -1,0 +1,24 @@
+{
+  "name": "k-fe",
+  "version": "1.0.0",
+  "main": "index.tsx",
+  "repository": "https://github.com/archiii92/k-fe.git",
+  "author": "Denis Novikov <https://github.com/archiii92>",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack"
+  },
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.0.40",
+    "@types/react-dom": "^16.0.4",
+    "awesome-typescript-loader": "^4.0.1",
+    "source-map-loader": "^0.2.3",
+    "typescript": "^2.7.2",
+    "webpack": "^4.2.0",
+    "webpack-cli": "^2.0.13"
+  }
+}
