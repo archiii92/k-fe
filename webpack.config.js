@@ -1,4 +1,6 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     entry: './src/index.tsx',
@@ -7,8 +9,8 @@ module.exports = {
         path: path.resolve(__dirname, 'dist')
     },
     devtool: 'source-map',
-    resolve: {
-        extensions: [".ts", ".tsx", ".js", ".json"]
+    devServer: {
+        contentBase: './dist'
     },
     module: {
         rules: [
@@ -23,8 +25,13 @@ module.exports = {
             }
         ]
     },
-    externals: {
-        "react": "React",
-        "react-dom": "ReactDOM"
+    plugins: [
+        new CleanWebpackPlugin(['dist']),
+        new HtmlWebpackPlugin({
+            template: './src/index.html'
+        })
+    ],
+    resolve: {
+        extensions: [".ts", ".tsx", ".js", ".json"]
     }
 };
