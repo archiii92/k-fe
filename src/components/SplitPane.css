@@ -1,0 +1,21 @@
+.splitPane {
+    display: flex;
+    flex-direction: row;
+    margin: 30px 40px;
+}
+
+.splitPane-left {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+    margin-right: 20px;
+}
+
+.splitPane-right {
+    display: flex;
+    flex: 2;
+    flex-direction: column;
+
+    margin-left: 20px;
+}
