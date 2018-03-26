@@ -4,8 +4,8 @@ export class DataSettings extends React.Component<{}> {
   render() {
     return (
       <>
+        <label>Укажите путь до файла с данными</label>
         <input type="file"/>
-        <label>Выберите файл с данными</label>
       </>
     );
   }

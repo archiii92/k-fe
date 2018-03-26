@@ -1,6 +1,7 @@
 .splitPane {
     display: flex;
     flex-direction: row;
+
     margin: 30px 40px;
 }
 
@@ -10,6 +11,7 @@
     flex-direction: column;
 
     margin-right: 20px;
+    /* background-color: #0ebbf0; */
 }
 
 .splitPane-right {
