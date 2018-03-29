@@ -1,0 +1,25 @@
+.section {
+  /* display: flex;
+  flex: 1;
+  flex-wrap: wrap; */
+  padding: 20px;
+  margin: 0 0 15px 0;
+}
+
+.section .container {
+  display: flex;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.section .container label {
+  margin: 0 15px 15px 0;
+}
+
+.lavender {
+  background-color: lavender;
+}
+
+.oldlace {
+  background-color: oldlace;
+}

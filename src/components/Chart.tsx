@@ -1,9 +1,13 @@
 import * as React from 'react';
 
+import './Chart.css';
+
 export class Chart extends React.Component<{}> {
   render() {
     return (
-      <div>Типо тут график</div>
+      <div className="chart">
+        <span>Типо тут график</span>
+      </div>
     );
   }
 }

@@ -1,23 +1,22 @@
 .splitPane {
     display: flex;
     flex-direction: row;
-
-    margin: 30px 40px;
+    align-items: stretch;
+    margin: 25px;
+    padding: 10px;
+    background-color: whitesmoke;
 }
 
 .splitPane-left {
     display: flex;
     flex: 1;
     flex-direction: column;
-
     margin-right: 20px;
-    /* background-color: #0ebbf0; */
 }
 
 .splitPane-right {
     display: flex;
     flex: 2;
     flex-direction: column;
-
     margin-left: 20px;
 }
