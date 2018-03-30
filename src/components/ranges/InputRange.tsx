@@ -2,8 +2,9 @@ import * as React from 'react';
 import * as ReactInputRange from 'react-input-range';
 
 import 'react-input-range/lib/css/index.css';
+import './InputRange.css';
 
-const InputRange: typeof ReactInputRange.default = ReactInputRange as any
+const RInputRange: typeof ReactInputRange.default = ReactInputRange as any
 
 interface InputRangeState { 
   value: number;
@@ -17,7 +18,7 @@ export interface InputRangeProps {
   handleRange: (value: number) => void;
 }
 
-export class MyInputRange extends React.Component<InputRangeProps, InputRangeState> {
+export class InputRange extends React.Component<InputRangeProps, InputRangeState> {
   constructor(props: InputRangeProps) {
     super(props);
 
@@ -41,11 +42,10 @@ export class MyInputRange extends React.Component<InputRangeProps, InputRangeSta
 
   render() {
     return (
-      <InputRange 
+      <RInputRange 
         {...this.props}
         {...this.state}
-        onChange={this.handleRange}
-        />
+        onChange={this.handleRange} />
     );
   }
 }

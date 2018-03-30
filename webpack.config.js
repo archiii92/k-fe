@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
@@ -16,7 +17,7 @@ module.exports = {
         rules: [
             {
                 test: /\.tsx?$/,
-                use: 'awesome-typescript-loader'
+                use: ['awesome-typescript-loader']
             },
             {
                 enforce: "pre",
@@ -33,7 +34,8 @@ module.exports = {
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
             template: './src/index.html'
-        })
+        }),
+        new webpack.NamedModulesPlugin()
     ],
     resolve: {
         extensions: [".ts", ".tsx", ".js", ".json"]

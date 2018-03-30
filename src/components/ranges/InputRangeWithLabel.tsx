@@ -1,18 +1,19 @@
 import * as React from 'react';
-import { MyInputRange, InputRangeProps } from './MyInputRange';
+import { InputRange, InputRangeProps } from './InputRange';
+
+import './InputRangeWithLabel.css';
 
 export interface InputRangeWithLabelProps {
   text: string;
-  rangeProps: InputRangeProps
+  inputRangeProps: InputRangeProps
 }
 
 export class InputRangeWithLabel extends React.Component<InputRangeWithLabelProps> {
-
   render() {
     return (
       <>
         <label>{this.props.text}</label>
-        <MyInputRange {...this.props.rangeProps} />
+        <InputRange {...this.props.inputRangeProps} />
       </>
     );
   }
