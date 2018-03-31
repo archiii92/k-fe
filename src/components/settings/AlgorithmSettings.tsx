@@ -1,37 +1,45 @@
 import * as React from 'react';
+import { InputSelect } from '../selects/InputSelect';
 
-interface AlgorithmSettingsState { value: string; }
 interface AlgorithmSettingsProps { }
+
+interface AlgorithmSettingsState { selectedAlgorithm: string; }
 
 export class AlgorithmSettings extends React.Component<AlgorithmSettingsProps, AlgorithmSettingsState> {
   constructor(props: AlgorithmSettingsProps) {
     super(props);
 
     this.state = {
-      value: 'sa',
+      selectedAlgorithm: 'sa',
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleAlgorithmSelect = this.handleAlgorithmSelect.bind(this);
   }
 
-  handleChange(event: React.ChangeEvent<HTMLSelectElement>) {
+  handleAlgorithmSelect(selectedAlgorithm: string) {
     this.setState({
-      value: event.target.value,
+      selectedAlgorithm,
     });
   }
 
   render() {
     return (
       <>
+      <div className="form-field">
         <label>
           Выберите алгоритм оптимизации нейронной сети:
-          <select value={this.state.value} onChange={this.handleChange}>
-            <option value="sa">Алгоритм имитации отжига</option>
-            <option value="pso">Модифицированный муравьиный алгоритм</option>
-            <option value="goa">Генетический алгоритм</option>
-            <option value="maco">Модифицированный муравьиный алгоритм</option>
-          </select>
+          <InputSelect
+            handleSelect={this.handleAlgorithmSelect}
+            initialValue={this.state.selectedAlgorithm}
+            options={[
+              { value: 'sa', label: 'Алгоритм имитации отжига' },
+              { value: 'pso', label: 'Алгоритм роя частиц' },
+              { value: 'goa', label: 'Генетический алгоритм' },
+              { value: 'maco', label: 'Модифицированный муравьиный алгоритм' },
+            ]}
+          />
         </label>
+      </div>
       </>
     );
   }

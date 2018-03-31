@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { Button } from './Button';
 
-interface ClearChartButtonProps { }
+export class ClearChartButton extends React.Component<{}> {
 
-export class ClearChartButton extends React.Component<ClearChartButtonProps> {
-
-  constructor(props: ClearChartButtonProps) {
+  constructor(props: {}) {
     super(props);
 
     this.clearChart = this.clearChart.bind(this);

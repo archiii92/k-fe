@@ -6,3 +6,11 @@
   align-items: center;
   justify-content: space-between;
 } */
+
+.form-field {
+  margin-bottom: 15px;
+}
+
+.form-field .inner {
+  margin-bottom: 30px;
+}

@@ -1,9 +1,14 @@
 import * as React from 'react';
-import { InputRangeWithLabel } from '../ranges/InputRangeWithLabel';
-import { InputFileWithLabel } from '../files/InputFileWithLabel';
+
+import { InputFile } from '../files/InputFile';
+import { InputRange } from '../ranges/InputRange';
 
 interface DataSettingsProps { }
-interface DataSettingsState { fileName: string; testTrainDivide: number; }
+
+interface DataSettingsState {
+  fileName: string;
+  testTrainDivide: number;
+}
 
 export class DataSettings extends React.Component<DataSettingsProps, DataSettingsState> {
   constructor(props: DataSettingsProps) {
@@ -11,43 +16,51 @@ export class DataSettings extends React.Component<DataSettingsProps, DataSetting
 
     this.state = {
       fileName: '',
-      testTrainDivide: 80
-    }
+      testTrainDivide: 80,
+    };
 
-    this.handleFile = this.handleFile.bind(this);
-    this.handleRange = this.handleRange.bind(this);
+    this.handleDataFile = this.handleDataFile.bind(this);
+    this.handleTestTrainDivideRange = this.handleTestTrainDivideRange.bind(this);
   }
 
-  handleFile(fileName: string) {
-      this.setState({
-        fileName
-      });
+  handleDataFile(fileName: string) {
+    this.setState({
+      fileName,
+    });
   }
 
-  handleRange(testTrainDivide: number) {
-      this.setState({
-        testTrainDivide
-      });
+  handleTestTrainDivideRange(testTrainDivide: number) {
+    this.setState({
+      testTrainDivide,
+    });
   }
-  
+
+  formatLabel(value: number) {
+    return `${value}%`;
+  }
+
   render() {
     return (
       <>
-        <InputFileWithLabel
-          text='Задайте процентное соотношение обучающей и тестовой выборки:'
-          inputFileProps={{
-            handleFile: this.handleFile
-          }} />
+        <div className="form-field">
+          <label>
+            Выберите файл с данными на основе которого будет происходить обучение и прогноз:
+            <InputFile handleFile={this.handleDataFile} />
+          </label>
+        </div>
 
-        <InputRangeWithLabel
-          text='Задайте процентное соотношение обучающей и тестовой выборки:'
-          inputRangeProps={{
-            maxValue: 90,
-            minValue: 10,
-            initialValue: this.state.testTrainDivide,
-            formatLabel: value => `${value}%`,
-            handleRange: this.handleRange
-          }} />
+        <div className="form-field">
+          <label>
+            Задайте процентное соотношение обучающей и тестовой выборки:
+            <InputRange
+              formatLabel={this.formatLabel}
+              handleRange={this.handleTestTrainDivideRange}
+              initialValue={this.state.testTrainDivide}
+              maxValue={90}
+              minValue={10}
+            />
+          </label>
+        </div>
       </>
     );
   }
