@@ -23,23 +23,45 @@ export class AlgorithmSettings extends React.Component<AlgorithmSettingsProps, A
   }
 
   render() {
+    const { selectedAlgorithm } = this.state;
+
     return (
       <>
-      <div className="form-field">
-        <label>
-          Выберите алгоритм оптимизации нейронной сети:
-          <InputSelect
-            handleSelect={this.handleAlgorithmSelect}
-            initialValue={this.state.selectedAlgorithm}
-            options={[
-              { value: 'sa', label: 'Алгоритм имитации отжига' },
-              { value: 'pso', label: 'Алгоритм роя частиц' },
-              { value: 'goa', label: 'Генетический алгоритм' },
-              { value: 'maco', label: 'Модифицированный муравьиный алгоритм' },
-            ]}
-          />
-        </label>
-      </div>
+        <div className="form-field">
+          <label>
+            Выберите алгоритм оптимизации нейронной сети:
+            <InputSelect
+              handleSelect={this.handleAlgorithmSelect}
+              initialValue={selectedAlgorithm}
+              options={[
+                { value: 'sa', label: 'Алгоритм имитации отжига' },
+                { value: 'pso', label: 'Алгоритм роя частиц' },
+                { value: 'goa', label: 'Генетический алгоритм' },
+                { value: 'maco', label: 'Модифицированный муравьиный алгоритм' },
+              ]}
+            />
+          </label>
+        </div>
+        {selectedAlgorithm === 'sa' &&
+          <div className="form-field">
+              Хей, да это же Алгоритм имитации отжига!
+          </div>
+        }
+        {selectedAlgorithm === 'pso' &&
+          <div className="form-field">
+              Хей, да это же Алгоритм роя частиц!
+          </div>
+        }
+        {selectedAlgorithm === 'goa' &&
+          <div className="form-field">
+              Хей, да это же Генетический алгоритм!
+          </div>
+        }
+        {selectedAlgorithm === 'maco' &&
+          <div className="form-field">
+              Хей, да это же Модифицированный муравьиный алгоритм!
+          </div>
+        }
       </>
     );
   }

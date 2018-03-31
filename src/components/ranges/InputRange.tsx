@@ -41,9 +41,13 @@ export class InputRange extends React.Component<InputRangeProps, InputRangeState
   }
 
   render() {
+    const { formatLabel, maxValue, minValue } = this.props;
+
     return (
       <INPUT_RANGE
-        {...this.props}
+        formatLabel={formatLabel}
+        maxValue={maxValue}
+        minValue={minValue}
         {...this.state}
         onChange={this.handleRange}
       />

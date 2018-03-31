@@ -14,3 +14,7 @@
 .form-field .inner {
   margin-bottom: 30px;
 }
+
+.form-field .inner:last-child {
+  margin-bottom: 0;
+}

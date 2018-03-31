@@ -63,7 +63,7 @@ export class NetworkSettings extends React.Component<NetworkSettingsProps, Netwo
             Выберите тип нейронной сети:
             <InputSelect
               handleSelect={this.handleNetworkSelect}
-              initialValue="fmpl"
+              initialValue={selectedNetwork}
               options={[
                 { value: 'mpl', label: 'Многослойный персептрон' },
                 { value: 'fmpl', label: 'Нечеткий многослойный персептрон' },
@@ -79,31 +79,31 @@ export class NetworkSettings extends React.Component<NetworkSettingsProps, Netwo
               Число нейронов входного слоя (скользящее окно)
               <InputRange
                 handleRange={this.handleInputLayerSizeRange}
-                initialValue={this.state.inputLayerSize}
+                initialValue={inputLayerSize}
                 maxValue={5}
                 minValue={1}
               />
             </label>
           </div>
-
-          <div className="form-field inner">
-            <label>
-              Число нейронов нечеткого слоя
-              <InputRange
-                handleRange={this.handleFuzzyLayerSizeRange}
-                initialValue={this.state.fuzzyLayerSize}
-                maxValue={12}
-                minValue={1}
-              />
-            </label>
-          </div>
-
+          {selectedNetwork === 'fmpl' &&
+            <div className="form-field inner">
+              <label>
+                Число нейронов нечеткого слоя
+                <InputRange
+                  handleRange={this.handleFuzzyLayerSizeRange}
+                  initialValue={fuzzyLayerSize}
+                  maxValue={12}
+                  minValue={1}
+                />
+              </label>
+            </div>
+          }
           <div className="form-field inner">
             <label>
               Число нейронов скрытого слоя
               <InputRange
                 handleRange={this.handleHiddenLayerSizeRange}
-                initialValue={this.state.hiddenLayerSize}
+                initialValue={hiddenLayerSize}
                 maxValue={9}
                 minValue={1}
               />

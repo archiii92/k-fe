@@ -43,9 +43,11 @@ export class InputSelect extends React.Component<InputSelectProps, InputSelectSt
   }
 
   render() {
+    const { options } = this.props;
+
     return (
       <SELECT
-        {...this.props}
+        options={options}
         {...this.state}
         onChange={this.handleSelect}
         clearable={false}
