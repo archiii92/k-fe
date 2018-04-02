@@ -51,7 +51,7 @@ export class DataSettings extends React.Component<DataSettingsProps, DataSetting
 
         <div className="form-field">
           <label>
-            Задайте процентное соотношение обучающей и тестовой выборки:
+            Cоотношение обучающей и тестовой выборки
             <InputRange
               formatLabel={this.formatLabel}
               handleRange={this.handleTestTrainDivideRange}

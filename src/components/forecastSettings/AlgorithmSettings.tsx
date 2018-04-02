@@ -1,9 +1,13 @@
 import * as React from 'react';
 import { InputSelect } from '../selects/InputSelect';
+import { SimulatedAnnealingSettings } from '../algorithmSettings/SimulatedAnnealingSettings';
+import { ParticleSwarmSettings } from '../algorithmSettings/ParticleSwarmSettings';
 
 interface AlgorithmSettingsProps { }
 
-interface AlgorithmSettingsState { selectedAlgorithm: string; }
+interface AlgorithmSettingsState {
+  selectedAlgorithm: string;
+}
 
 export class AlgorithmSettings extends React.Component<AlgorithmSettingsProps, AlgorithmSettingsState> {
   constructor(props: AlgorithmSettingsProps) {
@@ -43,13 +47,11 @@ export class AlgorithmSettings extends React.Component<AlgorithmSettingsProps, A
           </label>
         </div>
         {selectedAlgorithm === 'sa' &&
-          <div className="form-field">
-              Хей, да это же Алгоритм имитации отжига!
-          </div>
+          <SimulatedAnnealingSettings />
         }
         {selectedAlgorithm === 'pso' &&
           <div className="form-field">
-              Хей, да это же Алгоритм роя частиц!
+            <ParticleSwarmSettings />
           </div>
         }
         {selectedAlgorithm === 'goa' &&
