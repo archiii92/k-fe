@@ -1,12 +1,15 @@
 import * as React from 'react';
 import { InputSelect } from '../selects/InputSelect';
-import { SimulatedAnnealingSettings } from '../algorithmSettings/SimulatedAnnealingSettings';
-import { ParticleSwarmSettings } from '../algorithmSettings/ParticleSwarmSettings';
+import { SimulatedAnnealingSettings, SimulatedAnnealingSettingsState } from '../algorithmSettings/SimulatedAnnealingSettings';
+import { ParticleSwarmSettings, ParticleSwarmSettingsState } from '../algorithmSettings/ParticleSwarmSettings';
+import { GeneticSettings, GeneticSettingsState } from '../algorithmSettings/GeneticSettings';
+import { ModifiedAntColonySettingsState, ModifiedAntColonySettings } from '../algorithmSettings/ModifiedAntColonySettings';
 
 interface AlgorithmSettingsProps { }
 
 interface AlgorithmSettingsState {
   selectedAlgorithm: string;
+  algorithmParameters: ParticleSwarmSettingsState | SimulatedAnnealingSettingsState | GeneticSettingsState | ModifiedAntColonySettingsState;
 }
 
 export class AlgorithmSettings extends React.Component<AlgorithmSettingsProps, AlgorithmSettingsState> {
@@ -15,14 +18,22 @@ export class AlgorithmSettings extends React.Component<AlgorithmSettingsProps, A
 
     this.state = {
       selectedAlgorithm: 'sa',
+      algorithmParameters: null
     };
 
     this.handleAlgorithmSelect = this.handleAlgorithmSelect.bind(this);
+    this.handleAlgorithmParameter = this.handleAlgorithmParameter.bind(this);
   }
 
   handleAlgorithmSelect(selectedAlgorithm: string) {
     this.setState({
       selectedAlgorithm,
+    });
+  }
+
+  handleAlgorithmParameter(algorithmParameters: ParticleSwarmSettingsState | SimulatedAnnealingSettingsState  | GeneticSettingsState | ModifiedAntColonySettingsState) {
+    this.setState({
+      algorithmParameters,
     });
   }
 
@@ -47,22 +58,24 @@ export class AlgorithmSettings extends React.Component<AlgorithmSettingsProps, A
           </label>
         </div>
         {selectedAlgorithm === 'sa' &&
-          <SimulatedAnnealingSettings />
+          <SimulatedAnnealingSettings
+            handleAlgorithmParameter={this.handleAlgorithmParameter}
+          />
         }
         {selectedAlgorithm === 'pso' &&
-          <div className="form-field">
-            <ParticleSwarmSettings />
-          </div>
+          <ParticleSwarmSettings
+            handleAlgorithmParameter={this.handleAlgorithmParameter}
+          />
         }
         {selectedAlgorithm === 'goa' &&
-          <div className="form-field">
-              Хей, да это же Генетический алгоритм!
-          </div>
+          <GeneticSettings
+            handleAlgorithmParameter={this.handleAlgorithmParameter}
+          />
         }
         {selectedAlgorithm === 'maco' &&
-          <div className="form-field">
-              Хей, да это же Модифицированный муравьиный алгоритм!
-          </div>
+          <ModifiedAntColonySettings
+            handleAlgorithmParameter={this.handleAlgorithmParameter}
+          />
         }
       </>
     );

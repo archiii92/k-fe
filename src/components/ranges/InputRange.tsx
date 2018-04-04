@@ -16,6 +16,7 @@ export interface InputRangeProps {
   initialValue: number;
   maxValue: number;
   minValue: number;
+  step?: number;
 }
 
 export class InputRange extends React.Component<InputRangeProps, InputRangeState> {
@@ -41,13 +42,14 @@ export class InputRange extends React.Component<InputRangeProps, InputRangeState
   }
 
   render() {
-    const { formatLabel, maxValue, minValue } = this.props;
+    const { formatLabel, maxValue, minValue, step } = this.props;
 
     return (
       <INPUT_RANGE
         formatLabel={formatLabel}
         maxValue={maxValue}
         minValue={minValue}
+        step={step}
         {...this.state}
         onChange={this.handleRange}
       />

@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { InputRange } from '../ranges/InputRange';
 
-interface SimulatedAnnealingSettingsProps { }
+interface SimulatedAnnealingSettingsProps {
+  handleAlgorithmParameter: (algorithmParameters: SimulatedAnnealingSettingsState) => void
+}
 
-interface SimulatedAnnealingSettingsState {
+export interface SimulatedAnnealingSettingsState {
   initialTemperature: number;
   warmingKeepPercent: number;
 }
@@ -20,16 +22,13 @@ export class SimulatedAnnealingSettings extends React.Component<SimulatedAnneali
     this.handleRange = this.handleRange.bind(this);
   }
 
-  handleRange(fieldName: string, value: number) {
-    if (fieldName === 'initialTemperature') {
-      this.setState({
-        [fieldName]: value,
-      });
-    } else if (fieldName === 'warmingKeepPercent') {
-      this.setState({
-        [fieldName]: value,
-      });
-    }
+  handleRange(fieldName: 'initialTemperature' | 'warmingKeepPercent', value: number) {
+    // @ts-ignore
+    this.setState({
+      [fieldName]: value,
+    });
+
+    this.props.handleAlgorithmParameter(this.state);
   }
 
   formatLabel(value: number) {
@@ -40,34 +39,33 @@ export class SimulatedAnnealingSettings extends React.Component<SimulatedAnneali
     const { initialTemperature, warmingKeepPercent } = this.state;
 
     return (
-      <>
-        <div className="form-field">
-          <label>Задайте параметры алгоритма имитации отжига:</label>
-          <div className="form-field inner">
-            <label>
-              Начальная температура
-              <InputRange
-                handleRange={value => this.handleRange('initialTemperature', value)}
-                initialValue={initialTemperature}
-                maxValue={500}
-                minValue={1}
-              />
-            </label>
-          </div>
-          <div className="form-field inner">
-            <label>
-              Процент сохранения температуры
-              <InputRange
-                formatLabel={this.formatLabel}
-                handleRange={value => this.handleRange('warmingKeepPercent', value)}
-                initialValue={warmingKeepPercent}
-                maxValue={100}
-                minValue={1}
-              />
-            </label>
-          </div>
+      <div className="form-field">
+        <label>Задайте параметры алгоритма имитации отжига:</label>
+        <div className="form-field inner">
+          <label>
+            Начальная температура
+            <InputRange
+              handleRange={value => this.handleRange('initialTemperature', value)}
+              initialValue={initialTemperature}
+              maxValue={500}
+              minValue={1}
+              step={10}
+            />
+          </label>
         </div>
-      </>
+        <div className="form-field inner">
+          <label>
+            Процент сохранения температуры
+            <InputRange
+              formatLabel={this.formatLabel}
+              handleRange={value => this.handleRange('warmingKeepPercent', value)}
+              initialValue={warmingKeepPercent}
+              maxValue={100}
+              minValue={1}
+            />
+          </label>
+        </div>
+      </div>
     );
   }
 }
