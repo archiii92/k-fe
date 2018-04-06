@@ -1,44 +1,21 @@
 import * as React from 'react';
-import { InputSelect } from '../selects/InputSelect';
-import { SimulatedAnnealingSettings, SimulatedAnnealingSettingsState } from '../algorithmSettings/SimulatedAnnealingSettings';
-import { ParticleSwarmSettings, ParticleSwarmSettingsState } from '../algorithmSettings/ParticleSwarmSettings';
 import { GeneticSettings, GeneticSettingsState } from '../algorithmSettings/GeneticSettings';
-import { ModifiedAntColonySettingsState, ModifiedAntColonySettings } from '../algorithmSettings/ModifiedAntColonySettings';
+import { ModifiedAntColonySettings, ModifiedAntColonySettingsState } from '../algorithmSettings/ModifiedAntColonySettings';
+import { ParticleSwarmSettings, ParticleSwarmSettingsState } from '../algorithmSettings/ParticleSwarmSettings';
+import { SimulatedAnnealingSettings, SimulatedAnnealingSettingsState } from '../algorithmSettings/SimulatedAnnealingSettings';
+import { InputSelect } from '../selects/InputSelect';
 
-interface AlgorithmSettingsProps { }
-
-interface AlgorithmSettingsState {
+interface AlgorithmSettingsProps {
   selectedAlgorithm: string;
   algorithmParameters: ParticleSwarmSettingsState | SimulatedAnnealingSettingsState | GeneticSettingsState | ModifiedAntColonySettingsState;
+  handleAlgorithmSelect: (selectedAlgorithm: string) => void;
+  handleAlgorithmParameter: (algorithmParameters: ParticleSwarmSettingsState | SimulatedAnnealingSettingsState | GeneticSettingsState | ModifiedAntColonySettingsState) => void;
 }
 
-export class AlgorithmSettings extends React.Component<AlgorithmSettingsProps, AlgorithmSettingsState> {
-  constructor(props: AlgorithmSettingsProps) {
-    super(props);
-
-    this.state = {
-      selectedAlgorithm: 'sa',
-      algorithmParameters: null
-    };
-
-    this.handleAlgorithmSelect = this.handleAlgorithmSelect.bind(this);
-    this.handleAlgorithmParameter = this.handleAlgorithmParameter.bind(this);
-  }
-
-  handleAlgorithmSelect(selectedAlgorithm: string) {
-    this.setState({
-      selectedAlgorithm,
-    });
-  }
-
-  handleAlgorithmParameter(algorithmParameters: ParticleSwarmSettingsState | SimulatedAnnealingSettingsState  | GeneticSettingsState | ModifiedAntColonySettingsState) {
-    this.setState({
-      algorithmParameters,
-    });
-  }
+export class AlgorithmSettings extends React.Component<AlgorithmSettingsProps, {}> {
 
   render() {
-    const { selectedAlgorithm } = this.state;
+    const { selectedAlgorithm, algorithmParameters, handleAlgorithmSelect, handleAlgorithmParameter } = this.props;
 
     return (
       <>
@@ -46,7 +23,7 @@ export class AlgorithmSettings extends React.Component<AlgorithmSettingsProps, A
           <label>
             Выберите алгоритм оптимизации нейронной сети:
             <InputSelect
-              handleSelect={this.handleAlgorithmSelect}
+              handleSelect={handleAlgorithmSelect}
               initialValue={selectedAlgorithm}
               options={[
                 { value: 'sa', label: 'Алгоритм имитации отжига' },
@@ -59,22 +36,26 @@ export class AlgorithmSettings extends React.Component<AlgorithmSettingsProps, A
         </div>
         {selectedAlgorithm === 'sa' &&
           <SimulatedAnnealingSettings
-            handleAlgorithmParameter={this.handleAlgorithmParameter}
+            {...algorithmParameters}
+            handleAlgorithmParameter={handleAlgorithmParameter}
           />
         }
         {selectedAlgorithm === 'pso' &&
           <ParticleSwarmSettings
-            handleAlgorithmParameter={this.handleAlgorithmParameter}
+            {...algorithmParameters}
+            handleAlgorithmParameter={handleAlgorithmParameter}
           />
         }
         {selectedAlgorithm === 'goa' &&
           <GeneticSettings
-            handleAlgorithmParameter={this.handleAlgorithmParameter}
+            {...algorithmParameters}
+            handleAlgorithmParameter={handleAlgorithmParameter}
           />
         }
         {selectedAlgorithm === 'maco' &&
           <ModifiedAntColonySettings
-            handleAlgorithmParameter={this.handleAlgorithmParameter}
+            {...algorithmParameters}
+            handleAlgorithmParameter={handleAlgorithmParameter}
           />
         }
       </>

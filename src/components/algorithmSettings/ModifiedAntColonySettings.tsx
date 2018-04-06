@@ -2,7 +2,7 @@ import * as React from 'react';
 import { InputRange } from '../ranges/InputRange';
 
 interface ModifiedAntColonySettingsProps {
-  handleAlgorithmParameter: (algorithmParameters: ModifiedAntColonySettingsState) => void
+  handleAlgorithmParameter: (algorithmParameters: ModifiedAntColonySettingsState) => void;
 }
 
 export interface ModifiedAntColonySettingsState {
@@ -27,7 +27,7 @@ export class ModifiedAntColonySettings extends React.Component<ModifiedAntColony
   handleRange(fieldName: 'antCount' | 'iterationCount' | 'α', value: number) {
     // @ts-ignore
     this.setState({
-      [fieldName]: value
+      [fieldName]: value,
     });
 
     this.props.handleAlgorithmParameter(this.state);
@@ -48,7 +48,7 @@ export class ModifiedAntColonySettings extends React.Component<ModifiedAntColony
             Количество муравьев
             <InputRange
               handleRange={value => this.handleRange('antCount', value)}
-              initialValue={antCount}
+              value={antCount}
               maxValue={100}
               minValue={1}
               step={5}
@@ -60,7 +60,7 @@ export class ModifiedAntColonySettings extends React.Component<ModifiedAntColony
             Число итераций
             <InputRange
               handleRange={value => this.handleRange('iterationCount', value)}
-              initialValue={iterationCount}
+              value={iterationCount}
               maxValue={100}
               minValue={1}
               step={5}
@@ -73,7 +73,7 @@ export class ModifiedAntColonySettings extends React.Component<ModifiedAntColony
             <InputRange
               formatLabel={this.formatLabel}
               handleRange={value => this.handleRange('α', value)}
-              initialValue={α}
+              value={α}
               maxValue={1}
               minValue={0}
               step={0.5}

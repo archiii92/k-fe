@@ -3,58 +3,21 @@ import * as React from 'react';
 import { InputRange } from '../ranges/InputRange';
 import { InputSelect } from '../selects/InputSelect';
 
-interface NetworkSettingsProps { }
-
-interface NetworkSettingsState {
+interface NetworkSettingsProps {
   selectedNetwork: string;
   inputLayerSize: number;
   fuzzyLayerSize: number;
   hiddenLayerSize: number;
+  handleNetworkSelect: (selectedNetwork: string) => void;
+  handleInputLayerSizeRange: (inputLayerSize: number) => void;
+  handleFuzzyLayerSizeRange: (fuzzyLayerSize: number) => void;
+  handleHiddenLayerSizeRange: (hiddenLayerSize: number) => void;
 }
 
-export class NetworkSettings extends React.Component<NetworkSettingsProps, NetworkSettingsState> {
-  constructor(props: NetworkSettingsProps) {
-    super(props);
-
-    this.state = {
-      fuzzyLayerSize: 9,
-      hiddenLayerSize: 6,
-      inputLayerSize: 3,
-      selectedNetwork: 'fmpl',
-    };
-
-    this.handleNetworkSelect = this.handleNetworkSelect.bind(this);
-    this.handleInputLayerSizeRange = this.handleInputLayerSizeRange.bind(this);
-    this.handleFuzzyLayerSizeRange = this.handleFuzzyLayerSizeRange.bind(this);
-    this.handleHiddenLayerSizeRange = this.handleHiddenLayerSizeRange.bind(this);
-  }
-
-  handleNetworkSelect(selectedNetwork: string) {
-    this.setState({
-      selectedNetwork,
-    });
-  }
-
-  handleInputLayerSizeRange(inputLayerSize: number) {
-    this.setState({
-      inputLayerSize,
-    });
-  }
-
-  handleFuzzyLayerSizeRange(fuzzyLayerSize: number) {
-    this.setState({
-      fuzzyLayerSize,
-    });
-  }
-
-  handleHiddenLayerSizeRange(hiddenLayerSize: number) {
-    this.setState({
-      hiddenLayerSize,
-    });
-  }
+export class NetworkSettings extends React.Component<NetworkSettingsProps, {}> {
 
   render() {
-    const { selectedNetwork, inputLayerSize, fuzzyLayerSize, hiddenLayerSize } = this.state;
+    const { selectedNetwork, inputLayerSize, fuzzyLayerSize, hiddenLayerSize, handleNetworkSelect, handleInputLayerSizeRange, handleFuzzyLayerSizeRange, handleHiddenLayerSizeRange } = this.props;
 
     return (
       <>
@@ -62,7 +25,7 @@ export class NetworkSettings extends React.Component<NetworkSettingsProps, Netwo
           <label>
             Выберите тип нейронной сети:
             <InputSelect
-              handleSelect={this.handleNetworkSelect}
+              handleSelect={handleNetworkSelect}
               initialValue={selectedNetwork}
               options={[
                 { value: 'mpl', label: 'Многослойный персептрон' },
@@ -78,8 +41,8 @@ export class NetworkSettings extends React.Component<NetworkSettingsProps, Netwo
             <label>
               Число нейронов входного слоя (скользящее окно)
               <InputRange
-                handleRange={this.handleInputLayerSizeRange}
-                initialValue={inputLayerSize}
+                handleRange={handleInputLayerSizeRange}
+                value={inputLayerSize}
                 maxValue={5}
                 minValue={1}
               />
@@ -90,8 +53,8 @@ export class NetworkSettings extends React.Component<NetworkSettingsProps, Netwo
               <label>
                 Число нейронов нечеткого слоя
                 <InputRange
-                  handleRange={this.handleFuzzyLayerSizeRange}
-                  initialValue={fuzzyLayerSize}
+                  handleRange={handleFuzzyLayerSizeRange}
+                  value={fuzzyLayerSize}
                   maxValue={12}
                   minValue={1}
                 />
@@ -102,8 +65,8 @@ export class NetworkSettings extends React.Component<NetworkSettingsProps, Netwo
             <label>
               Число нейронов скрытого слоя
               <InputRange
-                handleRange={this.handleHiddenLayerSizeRange}
-                initialValue={hiddenLayerSize}
+                handleRange={handleHiddenLayerSizeRange}
+                value={hiddenLayerSize}
                 maxValue={9}
                 minValue={1}
               />

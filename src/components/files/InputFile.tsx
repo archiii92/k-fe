@@ -2,23 +2,15 @@ import * as React from 'react';
 
 import './InputFile.css';
 
-interface InputFileState {
-  fileName: string;
-}
-
 export interface InputFileProps {
   handleFile: (fileName: string) => void;
 }
 
-export class InputFile extends React.Component<InputFileProps, InputFileState> {
+export class InputFile extends React.Component<InputFileProps, {}> {
   fileInput: HTMLInputElement;
 
   constructor(props: InputFileProps) {
     super(props);
-
-    this.state = {
-      fileName: '',
-    };
 
     this.handleFile = this.handleFile.bind(this);
   }
@@ -26,12 +18,9 @@ export class InputFile extends React.Component<InputFileProps, InputFileState> {
   handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const { target } = e;
     if (target.value.length > 0) {
-
-      this.setState({
-        fileName: this.fileInput.files[0].name,
-      });
-
-      this.props.handleFile(this.state.fileName);
+      this.props.handleFile(this.fileInput.files[0].name);
+    } else {
+      this.props.handleFile('');
     }
   }
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { InputRange } from '../ranges/InputRange';
 
 interface SimulatedAnnealingSettingsProps {
-  handleAlgorithmParameter: (algorithmParameters: SimulatedAnnealingSettingsState) => void
+  handleAlgorithmParameter: (algorithmParameters: SimulatedAnnealingSettingsState) => void;
 }
 
 export interface SimulatedAnnealingSettingsState {
@@ -23,12 +23,13 @@ export class SimulatedAnnealingSettings extends React.Component<SimulatedAnneali
   }
 
   handleRange(fieldName: 'initialTemperature' | 'warmingKeepPercent', value: number) {
+
     // @ts-ignore
     this.setState({
       [fieldName]: value,
     });
 
-    this.props.handleAlgorithmParameter(this.state);
+    setTimeout(this.props.handleAlgorithmParameter(this.state), 1000);
   }
 
   formatLabel(value: number) {
@@ -46,7 +47,7 @@ export class SimulatedAnnealingSettings extends React.Component<SimulatedAnneali
             Начальная температура
             <InputRange
               handleRange={value => this.handleRange('initialTemperature', value)}
-              initialValue={initialTemperature}
+              value={initialTemperature}
               maxValue={500}
               minValue={1}
               step={10}
@@ -59,7 +60,7 @@ export class SimulatedAnnealingSettings extends React.Component<SimulatedAnneali
             <InputRange
               formatLabel={this.formatLabel}
               handleRange={value => this.handleRange('warmingKeepPercent', value)}
-              initialValue={warmingKeepPercent}
+              value={warmingKeepPercent}
               maxValue={100}
               minValue={1}
             />

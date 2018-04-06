@@ -2,7 +2,7 @@ import * as React from 'react';
 import { InputRange } from '../ranges/InputRange';
 
 interface ParticleSwarmSettingsProps {
-  handleAlgorithmParameter: (algorithmParameters: ParticleSwarmSettingsState) => void
+  handleAlgorithmParameter: (algorithmParameters: ParticleSwarmSettingsState) => void;
 }
 
 export interface ParticleSwarmSettingsState {
@@ -18,11 +18,11 @@ export class ParticleSwarmSettings extends React.Component<ParticleSwarmSettings
     super(props);
 
     this.state = {
-      particleCount: 100,
       iterationCount: 30,
-      φp: 2,
-      φg: 3,
       k: 1,
+      particleCount: 100,
+      φg: 3,
+      φp: 2,
     };
 
     this.handleRange = this.handleRange.bind(this);
@@ -31,7 +31,7 @@ export class ParticleSwarmSettings extends React.Component<ParticleSwarmSettings
   handleRange(fieldName: 'particleCount' | 'iterationCount' | 'φp' | 'φg' | 'k', value: number) {
     // @ts-ignore
     this.setState({
-      [fieldName]: value
+      [fieldName]: value,
     });
 
     this.props.handleAlgorithmParameter(this.state);
@@ -52,7 +52,7 @@ export class ParticleSwarmSettings extends React.Component<ParticleSwarmSettings
             Количество частиц
             <InputRange
               handleRange={value => this.handleRange('particleCount', value)}
-              initialValue={particleCount}
+              value={particleCount}
               maxValue={150}
               minValue={1}
               step={5}
@@ -64,7 +64,7 @@ export class ParticleSwarmSettings extends React.Component<ParticleSwarmSettings
             Число итераций
             <InputRange
               handleRange={value => this.handleRange('iterationCount', value)}
-              initialValue={iterationCount}
+              value={iterationCount}
               maxValue={150}
               minValue={1}
               step={5}
@@ -76,7 +76,7 @@ export class ParticleSwarmSettings extends React.Component<ParticleSwarmSettings
             Коэффициент φp
             <InputRange
               handleRange={value => this.handleRange('φp', value)}
-              initialValue={φp}
+              value={φp}
               maxValue={5}
               minValue={1}
             />
@@ -87,7 +87,7 @@ export class ParticleSwarmSettings extends React.Component<ParticleSwarmSettings
             Коэффициент φg
             <InputRange
               handleRange={value => this.handleRange('φg', value)}
-              initialValue={φg}
+              value={φg}
               maxValue={5}
               minValue={1}
             />
@@ -99,7 +99,7 @@ export class ParticleSwarmSettings extends React.Component<ParticleSwarmSettings
             <InputRange
               formatLabel={this.formatLabel}
               handleRange={value => this.handleRange('k', value)}
-              initialValue={k}
+              value={k}
               maxValue={1}
               minValue={0}
               step={0.1}

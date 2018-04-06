@@ -1,16 +1,33 @@
 import * as React from 'react';
 import { Button } from './Button';
+import { GeneticSettingsState } from '../algorithmSettings/GeneticSettings';
+import { ModifiedAntColonySettingsState } from '../algorithmSettings/ModifiedAntColonySettings';
+import { ParticleSwarmSettingsState } from '../algorithmSettings/ParticleSwarmSettings';
+import { SimulatedAnnealingSettingsState } from '../algorithmSettings/SimulatedAnnealingSettings';
 
-export class RunButton extends React.Component<{}> {
+interface RunButtonProps {
+  fileName: string;
+  testTrainDivide: number;
+  selectedNetwork: string;
+  inputLayerSize: number;
+  fuzzyLayerSize: number;
+  hiddenLayerSize: number;
+  selectedAlgorithm: string;
+  algorithmParameters: ParticleSwarmSettingsState | SimulatedAnnealingSettingsState | GeneticSettingsState | ModifiedAntColonySettingsState;
+}
 
-  constructor(props: {}) {
+export class RunButton extends React.Component<RunButtonProps> {
+
+  constructor(props: RunButtonProps) {
     super(props);
 
     this.handleRun = this.handleRun.bind(this);
   }
 
   handleRun() {
-    alert('Ruuuuuuuuuuuuuuun!');
+    const { fileName, testTrainDivide, selectedNetwork, selectedAlgorithm, algorithmParameters } = this.props;
+
+    alert('Ruuuuuuuuuuuuuuun! ' + fileName + ' ' + testTrainDivide + ' ' + selectedNetwork + ' ' + selectedAlgorithm + ' ');
   }
 
   render() {

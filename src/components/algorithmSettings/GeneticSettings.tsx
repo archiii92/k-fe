@@ -2,7 +2,7 @@ import * as React from 'react';
 import { InputRange } from '../ranges/InputRange';
 
 interface GeneticSettingsProps {
-  handleAlgorithmParameter: (algorithmParameters: GeneticSettingsState) => void
+  handleAlgorithmParameter: (algorithmParameters: GeneticSettingsState) => void;
 }
 
 export interface GeneticSettingsState {
@@ -17,10 +17,10 @@ export class GeneticSettings extends React.Component<GeneticSettingsProps, Genet
     super(props);
 
     this.state = {
-      speciesCount: 15,
-      iterationCount: 65,
       crossPossibility: 100,
+      iterationCount: 65,
       mutationPossibility: 50,
+      speciesCount: 15,
     };
 
     this.handleRange = this.handleRange.bind(this);
@@ -29,7 +29,7 @@ export class GeneticSettings extends React.Component<GeneticSettingsProps, Genet
   handleRange(fieldName: 'speciesCount' | 'iterationCount' | 'crossPossibility' | 'mutationPossibility', value: number) {
     // @ts-ignore
     this.setState({
-      [fieldName]: value
+      [fieldName]: value,
     });
 
     this.props.handleAlgorithmParameter(this.state);
@@ -50,7 +50,7 @@ export class GeneticSettings extends React.Component<GeneticSettingsProps, Genet
             Количество особей
             <InputRange
               handleRange={value => this.handleRange('speciesCount', value)}
-              initialValue={speciesCount}
+              value={speciesCount}
               maxValue={100}
               minValue={1}
             />
@@ -61,7 +61,7 @@ export class GeneticSettings extends React.Component<GeneticSettingsProps, Genet
             Число итераций
             <InputRange
               handleRange={value => this.handleRange('iterationCount', value)}
-              initialValue={iterationCount}
+              value={iterationCount}
               maxValue={100}
               minValue={1}
             />
@@ -73,7 +73,7 @@ export class GeneticSettings extends React.Component<GeneticSettingsProps, Genet
             <InputRange
               formatLabel={this.formatLabel}
               handleRange={value => this.handleRange('crossPossibility', value)}
-              initialValue={crossPossibility}
+              value={crossPossibility}
               maxValue={100}
               minValue={0}
             />
@@ -85,7 +85,7 @@ export class GeneticSettings extends React.Component<GeneticSettingsProps, Genet
             <InputRange
               formatLabel={this.formatLabel}
               handleRange={value => this.handleRange('mutationPossibility', value)}
-              initialValue={mutationPossibility}
+              value={mutationPossibility}
               maxValue={100}
               minValue={0}
             />
