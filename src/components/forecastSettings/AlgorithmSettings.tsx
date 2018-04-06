@@ -9,7 +9,7 @@ interface AlgorithmSettingsProps {
   selectedAlgorithm: string;
   algorithmParameters: ParticleSwarmSettingsState | SimulatedAnnealingSettingsState | GeneticSettingsState | ModifiedAntColonySettingsState;
   handleAlgorithmSelect: (selectedAlgorithm: string) => void;
-  handleAlgorithmParameter: (algorithmParameters: ParticleSwarmSettingsState | SimulatedAnnealingSettingsState | GeneticSettingsState | ModifiedAntColonySettingsState) => void;
+  handleAlgorithmParameter: (fieldName: string, value: number) => void;
 }
 
 export class AlgorithmSettings extends React.Component<AlgorithmSettingsProps, {}> {
@@ -36,17 +36,19 @@ export class AlgorithmSettings extends React.Component<AlgorithmSettingsProps, {
         </div>
         {selectedAlgorithm === 'sa' &&
           <SimulatedAnnealingSettings
+            // @ts-ignore
             {...algorithmParameters}
             handleAlgorithmParameter={handleAlgorithmParameter}
           />
         }
         {selectedAlgorithm === 'pso' &&
           <ParticleSwarmSettings
+            // @ts-ignore
             {...algorithmParameters}
             handleAlgorithmParameter={handleAlgorithmParameter}
           />
         }
-        {selectedAlgorithm === 'goa' &&
+        {/* {selectedAlgorithm === 'goa' &&
           <GeneticSettings
             {...algorithmParameters}
             handleAlgorithmParameter={handleAlgorithmParameter}
@@ -57,7 +59,7 @@ export class AlgorithmSettings extends React.Component<AlgorithmSettingsProps, {
             {...algorithmParameters}
             handleAlgorithmParameter={handleAlgorithmParameter}
           />
-        }
+        } */}
       </>
     );
   }

@@ -2,7 +2,12 @@ import * as React from 'react';
 import { InputRange } from '../ranges/InputRange';
 
 interface ParticleSwarmSettingsProps {
-  handleAlgorithmParameter: (algorithmParameters: ParticleSwarmSettingsState) => void;
+  handleAlgorithmParameter: (fieldName: string, value: number) => void;
+  particleCount: number;
+  iterationCount: number;
+  φp: number;
+  φg: number;
+  k: number;
 }
 
 export interface ParticleSwarmSettingsState {
@@ -17,24 +22,24 @@ export class ParticleSwarmSettings extends React.Component<ParticleSwarmSettings
   constructor(props: ParticleSwarmSettingsProps) {
     super(props);
 
-    this.state = {
-      iterationCount: 30,
-      k: 1,
-      particleCount: 100,
-      φg: 3,
-      φp: 2,
-    };
+    // this.state = {
+    //   iterationCount: 30,
+    //   k: 1,
+    //   particleCount: 100,
+    //   φg: 3,
+    //   φp: 2,
+    // };
 
     this.handleRange = this.handleRange.bind(this);
   }
 
   handleRange(fieldName: 'particleCount' | 'iterationCount' | 'φp' | 'φg' | 'k', value: number) {
     // @ts-ignore
-    this.setState({
-      [fieldName]: value,
-    });
+    // this.setState({
+    //   [fieldName]: value,
+    // });
 
-    this.props.handleAlgorithmParameter(this.state);
+    this.props.handleAlgorithmParameter(fieldName, value);
   }
 
   formatLabel(value: number) {
@@ -42,7 +47,7 @@ export class ParticleSwarmSettings extends React.Component<ParticleSwarmSettings
   }
 
   render() {
-    const { particleCount, iterationCount, φp, φg, k } = this.state;
+    const { particleCount, iterationCount, φp, φg, k } = this.props;
 
     return (
       <div className="form-field">

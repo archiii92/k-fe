@@ -126,16 +126,35 @@ export class App extends React.Component<{}, AppState> {
     const { algorithmSettings } = this.state;
     algorithmSettings.selectedAlgorithm = selectedAlgorithm;
 
+    switch (selectedAlgorithm) {
+      case 'sa': {
+        algorithmSettings.algorithmParameters = {
+          initialTemperature: 100,
+          warmingKeepPercent: 90,
+        }
+        break;
+      }
+      case 'pso': {
+        algorithmSettings.algorithmParameters = {
+          iterationCount: 30,
+          k: 1,
+          particleCount: 100,
+          φg: 3,
+          φp: 2,
+        }
+        break;
+      }
+    }
+
     this.setState({
       algorithmSettings,
     });
   }
 
-  handleAlgorithmParameter(
-    algorithmParameters: ParticleSwarmSettingsState | SimulatedAnnealingSettingsState | GeneticSettingsState | ModifiedAntColonySettingsState,
-  ) {
+  handleAlgorithmParameter(fieldName: string, value: number) {
     const { algorithmSettings } = this.state;
-    algorithmSettings.algorithmParameters = algorithmParameters;
+    // @ts-ignore
+    algorithmSettings.algorithmParameters[fieldName] = value;
 
     this.setState({
       algorithmSettings,

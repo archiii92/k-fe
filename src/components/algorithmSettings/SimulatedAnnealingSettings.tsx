@@ -2,7 +2,9 @@ import * as React from 'react';
 import { InputRange } from '../ranges/InputRange';
 
 interface SimulatedAnnealingSettingsProps {
-  handleAlgorithmParameter: (algorithmParameters: SimulatedAnnealingSettingsState) => void;
+  handleAlgorithmParameter: (fieldName: string, value: number) => void;
+  initialTemperature: number;
+  warmingKeepPercent: number;
 }
 
 export interface SimulatedAnnealingSettingsState {
@@ -14,10 +16,10 @@ export class SimulatedAnnealingSettings extends React.Component<SimulatedAnneali
   constructor(props: SimulatedAnnealingSettingsProps) {
     super(props);
 
-    this.state = {
-      initialTemperature: 100,
-      warmingKeepPercent: 90,
-    };
+    // this.state = {
+    //   initialTemperature: 100,
+    //   warmingKeepPercent: 90,
+    // };
 
     this.handleRange = this.handleRange.bind(this);
   }
@@ -25,11 +27,11 @@ export class SimulatedAnnealingSettings extends React.Component<SimulatedAnneali
   handleRange(fieldName: 'initialTemperature' | 'warmingKeepPercent', value: number) {
 
     // @ts-ignore
-    this.setState({
-      [fieldName]: value,
-    });
+    // this.setState({
+    //   [fieldName]: value,
+    // });
 
-    setTimeout(this.props.handleAlgorithmParameter(this.state), 1000);
+    this.props.handleAlgorithmParameter(fieldName, value);
   }
 
   formatLabel(value: number) {
@@ -37,7 +39,7 @@ export class SimulatedAnnealingSettings extends React.Component<SimulatedAnneali
   }
 
   render() {
-    const { initialTemperature, warmingKeepPercent } = this.state;
+    const { initialTemperature, warmingKeepPercent } = this.props;
 
     return (
       <div className="form-field">
