@@ -48,18 +48,20 @@ export class AlgorithmSettings extends React.Component<AlgorithmSettingsProps, {
             handleAlgorithmParameter={handleAlgorithmParameter}
           />
         }
-        {/* {selectedAlgorithm === 'goa' &&
+        {selectedAlgorithm === 'goa' &&
           <GeneticSettings
+            // @ts-ignore
             {...algorithmParameters}
             handleAlgorithmParameter={handleAlgorithmParameter}
           />
         }
         {selectedAlgorithm === 'maco' &&
           <ModifiedAntColonySettings
+            // @ts-ignore
             {...algorithmParameters}
             handleAlgorithmParameter={handleAlgorithmParameter}
           />
-        } */}
+        }
       </>
     );
   }

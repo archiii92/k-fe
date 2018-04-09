@@ -2,6 +2,10 @@ import * as React from 'react';
 
 import './App.css';
 
+import { GeneticSettingsState } from './algorithmSettings/GeneticSettings';
+import { ModifiedAntColonySettingsState } from './algorithmSettings/ModifiedAntColonySettings';
+import { ParticleSwarmSettingsState } from './algorithmSettings/ParticleSwarmSettings';
+import { SimulatedAnnealingSettingsState } from './algorithmSettings/SimulatedAnnealingSettings';
 import { ClearChartButton } from './buttons/ClearChartButton';
 import { RunButton } from './buttons/RunButton';
 import { Chart } from './Chart';
@@ -10,10 +14,6 @@ import { DataSettings } from './forecastSettings/DataSettings';
 import { NetworkSettings } from './forecastSettings/NetworkSettings';
 import { Section } from './wrappers/Section';
 import { SplitPane } from './wrappers/SplitPane';
-import { GeneticSettingsState } from './algorithmSettings/GeneticSettings';
-import { ModifiedAntColonySettingsState } from './algorithmSettings/ModifiedAntColonySettings';
-import { ParticleSwarmSettingsState } from './algorithmSettings/ParticleSwarmSettings';
-import { SimulatedAnnealingSettingsState } from './algorithmSettings/SimulatedAnnealingSettings';
 
 interface AppState {
   dataSettings: {
@@ -131,7 +131,7 @@ export class App extends React.Component<{}, AppState> {
         algorithmSettings.algorithmParameters = {
           initialTemperature: 100,
           warmingKeepPercent: 90,
-        }
+        };
         break;
       }
       case 'pso': {
@@ -141,7 +141,24 @@ export class App extends React.Component<{}, AppState> {
           particleCount: 100,
           φg: 3,
           φp: 2,
-        }
+        };
+        break;
+      }
+      case 'goa': {
+        algorithmSettings.algorithmParameters = {
+          crossPossibility: 100,
+          iterationCount: 65,
+          mutationPossibility: 50,
+          speciesCount: 15,
+        };
+        break;
+      }
+      case 'maco': {
+        algorithmSettings.algorithmParameters = {
+          antCount: 30,
+          iterationCount: 25,
+          α: 0.1,
+        };
         break;
       }
     }

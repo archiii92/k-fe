@@ -18,27 +18,14 @@ export interface ParticleSwarmSettingsState {
   k: number;
 }
 
-export class ParticleSwarmSettings extends React.Component<ParticleSwarmSettingsProps, ParticleSwarmSettingsState> {
+export class ParticleSwarmSettings extends React.Component<ParticleSwarmSettingsProps> {
   constructor(props: ParticleSwarmSettingsProps) {
     super(props);
-
-    // this.state = {
-    //   iterationCount: 30,
-    //   k: 1,
-    //   particleCount: 100,
-    //   φg: 3,
-    //   φp: 2,
-    // };
 
     this.handleRange = this.handleRange.bind(this);
   }
 
   handleRange(fieldName: 'particleCount' | 'iterationCount' | 'φp' | 'φg' | 'k', value: number) {
-    // @ts-ignore
-    // this.setState({
-    //   [fieldName]: value,
-    // });
-
     this.props.handleAlgorithmParameter(fieldName, value);
   }
 

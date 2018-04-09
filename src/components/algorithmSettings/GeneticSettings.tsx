@@ -2,7 +2,11 @@ import * as React from 'react';
 import { InputRange } from '../ranges/InputRange';
 
 interface GeneticSettingsProps {
-  handleAlgorithmParameter: (algorithmParameters: GeneticSettingsState) => void;
+  handleAlgorithmParameter: (fieldName: string, value: number) => void;
+  speciesCount: number;
+  iterationCount: number;
+  crossPossibility: number;
+  mutationPossibility: number;
 }
 
 export interface GeneticSettingsState {
@@ -12,27 +16,15 @@ export interface GeneticSettingsState {
   mutationPossibility: number;
 }
 
-export class GeneticSettings extends React.Component<GeneticSettingsProps, GeneticSettingsState> {
+export class GeneticSettings extends React.Component<GeneticSettingsProps> {
   constructor(props: GeneticSettingsProps) {
     super(props);
-
-    this.state = {
-      crossPossibility: 100,
-      iterationCount: 65,
-      mutationPossibility: 50,
-      speciesCount: 15,
-    };
 
     this.handleRange = this.handleRange.bind(this);
   }
 
   handleRange(fieldName: 'speciesCount' | 'iterationCount' | 'crossPossibility' | 'mutationPossibility', value: number) {
-    // @ts-ignore
-    this.setState({
-      [fieldName]: value,
-    });
-
-    this.props.handleAlgorithmParameter(this.state);
+    this.props.handleAlgorithmParameter(fieldName, value);
   }
 
   formatLabel(value: number) {
@@ -40,7 +32,7 @@ export class GeneticSettings extends React.Component<GeneticSettingsProps, Genet
   }
 
   render() {
-    const { speciesCount, iterationCount, crossPossibility, mutationPossibility } = this.state;
+    const { speciesCount, iterationCount, crossPossibility, mutationPossibility } = this.props;
 
     return (
       <div className="form-field">

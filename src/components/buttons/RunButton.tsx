@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Button } from './Button';
 import { GeneticSettingsState } from '../algorithmSettings/GeneticSettings';
 import { ModifiedAntColonySettingsState } from '../algorithmSettings/ModifiedAntColonySettings';
 import { ParticleSwarmSettingsState } from '../algorithmSettings/ParticleSwarmSettings';
 import { SimulatedAnnealingSettingsState } from '../algorithmSettings/SimulatedAnnealingSettings';
+import { Button } from './Button';
 
 interface RunButtonProps {
   fileName: string;

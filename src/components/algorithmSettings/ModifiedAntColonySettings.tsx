@@ -2,7 +2,10 @@ import * as React from 'react';
 import { InputRange } from '../ranges/InputRange';
 
 interface ModifiedAntColonySettingsProps {
-  handleAlgorithmParameter: (algorithmParameters: ModifiedAntColonySettingsState) => void;
+  handleAlgorithmParameter: (fieldName: string, value: number) => void;
+  antCount: number;
+  iterationCount: number;
+  α: number;
 }
 
 export interface ModifiedAntColonySettingsState {
@@ -11,26 +14,15 @@ export interface ModifiedAntColonySettingsState {
   α: number;
 }
 
-export class ModifiedAntColonySettings extends React.Component<ModifiedAntColonySettingsProps, ModifiedAntColonySettingsState> {
+export class ModifiedAntColonySettings extends React.Component<ModifiedAntColonySettingsProps> {
   constructor(props: ModifiedAntColonySettingsProps) {
     super(props);
-
-    this.state = {
-      antCount: 30,
-      iterationCount: 25,
-      α: 0.1,
-    };
 
     this.handleRange = this.handleRange.bind(this);
   }
 
   handleRange(fieldName: 'antCount' | 'iterationCount' | 'α', value: number) {
-    // @ts-ignore
-    this.setState({
-      [fieldName]: value,
-    });
-
-    this.props.handleAlgorithmParameter(this.state);
+    this.props.handleAlgorithmParameter(fieldName, value);
   }
 
   formatLabel(value: number) {
@@ -38,7 +30,7 @@ export class ModifiedAntColonySettings extends React.Component<ModifiedAntColony
   }
 
   render() {
-    const { antCount, iterationCount, α } = this.state;
+    const { antCount, iterationCount, α } = this.props;
 
     return (
       <div className="form-field">

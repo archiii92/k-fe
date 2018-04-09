@@ -17,7 +17,16 @@ interface NetworkSettingsProps {
 export class NetworkSettings extends React.Component<NetworkSettingsProps, {}> {
 
   render() {
-    const { selectedNetwork, inputLayerSize, fuzzyLayerSize, hiddenLayerSize, handleNetworkSelect, handleInputLayerSizeRange, handleFuzzyLayerSizeRange, handleHiddenLayerSizeRange } = this.props;
+    const {
+      selectedNetwork,
+      inputLayerSize,
+      fuzzyLayerSize,
+      hiddenLayerSize,
+      handleNetworkSelect,
+      handleInputLayerSizeRange,
+      handleFuzzyLayerSizeRange,
+      handleHiddenLayerSizeRange,
+    } = this.props;
 
     return (
       <>

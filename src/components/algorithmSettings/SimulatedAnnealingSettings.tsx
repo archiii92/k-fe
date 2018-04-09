@@ -12,25 +12,14 @@ export interface SimulatedAnnealingSettingsState {
   warmingKeepPercent: number;
 }
 
-export class SimulatedAnnealingSettings extends React.Component<SimulatedAnnealingSettingsProps, SimulatedAnnealingSettingsState> {
+export class SimulatedAnnealingSettings extends React.Component<SimulatedAnnealingSettingsProps> {
   constructor(props: SimulatedAnnealingSettingsProps) {
     super(props);
-
-    // this.state = {
-    //   initialTemperature: 100,
-    //   warmingKeepPercent: 90,
-    // };
 
     this.handleRange = this.handleRange.bind(this);
   }
 
   handleRange(fieldName: 'initialTemperature' | 'warmingKeepPercent', value: number) {
-
-    // @ts-ignore
-    // this.setState({
-    //   [fieldName]: value,
-    // });
-
     this.props.handleAlgorithmParameter(fieldName, value);
   }
 
