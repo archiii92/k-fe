@@ -7,7 +7,7 @@ import { Button } from './Button';
 
 interface RunButtonProps {
   fileName: string;
-  testTrainDivide: number;
+  trainTestDivide: number;
   selectedNetwork: string;
   inputLayerSize: number;
   fuzzyLayerSize: number;
@@ -25,9 +25,9 @@ export class RunButton extends React.Component<RunButtonProps> {
   }
 
   handleRun() {
-    const { fileName, testTrainDivide, selectedNetwork, selectedAlgorithm, algorithmParameters } = this.props;
+    const { fileName, trainTestDivide, selectedNetwork, selectedAlgorithm, algorithmParameters } = this.props;
 
-    alert('Ruuuuuuuuuuuuuuun! ' + fileName + ' ' + testTrainDivide + ' ' + selectedNetwork + ' ' + selectedAlgorithm + ' ');
+    alert('Ruuuuuuuuuuuuuuun! ' + fileName + ' ' + trainTestDivide + ' ' + selectedNetwork + ' ' + selectedAlgorithm + ' ');
   }
 
   render() {

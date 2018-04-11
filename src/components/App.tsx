@@ -18,7 +18,7 @@ import { SplitPane } from './wrappers/SplitPane';
 interface AppState {
   dataSettings: {
     fileName: string;
-    testTrainDivide: number;
+    trainTestDivide: number;
   };
 
   networkSettings: {
@@ -48,18 +48,18 @@ export class App extends React.Component<{}, AppState> {
       },
       dataSettings: {
         fileName: '',
-        testTrainDivide: 80,
+        trainTestDivide: 80,
       },
       networkSettings: {
         fuzzyLayerSize: 9,
         hiddenLayerSize: 6,
         inputLayerSize: 3,
-        selectedNetwork: 'fmpl',
+        selectedNetwork: 'fmlp',
       },
     };
 
     this.handleFileName = this.handleFileName.bind(this);
-    this.handleTestTrainDivide = this.handleTestTrainDivide.bind(this);
+    this.handleTrainTestDivide = this.handleTrainTestDivide.bind(this);
     this.handleNetworkSelect = this.handleNetworkSelect.bind(this);
     this.handleInputLayerSizeRange = this.handleInputLayerSizeRange.bind(this);
     this.handleFuzzyLayerSizeRange = this.handleFuzzyLayerSizeRange.bind(this);
@@ -77,9 +77,9 @@ export class App extends React.Component<{}, AppState> {
     });
   }
 
-  handleTestTrainDivide(testTrainDivide: number) {
+  handleTrainTestDivide(trainTestDivide: number) {
     const { dataSettings } = this.state;
-    dataSettings.testTrainDivide = testTrainDivide;
+    dataSettings.trainTestDivide = trainTestDivide;
 
     this.setState({
       dataSettings,
@@ -187,9 +187,9 @@ export class App extends React.Component<{}, AppState> {
           <>
             <Section color="lavender">
               <DataSettings
-                testTrainDivide={dataSettings.testTrainDivide}
+                trainTestDivide={dataSettings.trainTestDivide}
                 handleFileName={this.handleFileName}
-                handleTestTrainDivide={this.handleTestTrainDivide}
+                handleTrainTestDivide={this.handleTrainTestDivide}
               />
             </Section>
             <Section color="oldlace">

@@ -38,7 +38,7 @@ export class NetworkSettings extends React.Component<NetworkSettingsProps, {}> {
               initialValue={selectedNetwork}
               options={[
                 { value: 'mpl', label: 'Многослойный персептрон' },
-                { value: 'fmpl', label: 'Нечеткий многослойный персептрон' },
+                { value: 'fmlp', label: 'Нечеткий многослойный персептрон' },
               ]}
             />
           </label>
@@ -57,7 +57,7 @@ export class NetworkSettings extends React.Component<NetworkSettingsProps, {}> {
               />
             </label>
           </div>
-          {selectedNetwork === 'fmpl' &&
+          {selectedNetwork === 'fmlp' &&
             <div className="form-field inner">
               <label>
                 Число нейронов нечеткого слоя
