@@ -25,14 +25,40 @@ export class RunButton extends React.Component<RunButtonProps> {
   }
 
   handleRun() {
-    const { fileName, trainTestDivide, selectedNetwork, selectedAlgorithm, algorithmParameters } = this.props;
+    const {
+      fileName,
+      trainTestDivide,
+      fuzzyLayerSize,
+      hiddenLayerSize,
+      inputLayerSize,
+      selectedNetwork,
+      selectedAlgorithm,
+      algorithmParameters,
+    } = this.props;
 
-    alert('Ruuuuuuuuuuuuuuun! ' + fileName + ' ' + trainTestDivide + ' ' + selectedNetwork + ' ' + selectedAlgorithm + ' ');
+    fetch('http://localhost:8080/forecast', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        fileName,
+        trainTestDivide,
+        fuzzyLayerSize,
+        hiddenLayerSize,
+        inputLayerSize,
+        selectedNetwork,
+        selectedAlgorithm,
+        ...algorithmParameters,
+      })
+    }).then((respone) => {
+      console.log(respone);
+    });
   }
 
   render() {
     return (
-      <Button title="Запуск" handleClick={this.handleRun} />
+      <Button title="Начать планирование" handleClick={this.handleRun} />
     );
   }
 }
