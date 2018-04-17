@@ -6,9 +6,8 @@ import { GeneticSettingsState } from './algorithmSettings/GeneticSettings';
 import { ModifiedAntColonySettingsState } from './algorithmSettings/ModifiedAntColonySettings';
 import { ParticleSwarmSettingsState } from './algorithmSettings/ParticleSwarmSettings';
 import { SimulatedAnnealingSettingsState } from './algorithmSettings/SimulatedAnnealingSettings';
-import { ClearChartButton } from './buttons/ClearChartButton';
-import { RunButton } from './buttons/RunButton';
-import { Chart } from './Chart';
+import { ForecastResult, RunButton } from './buttons/RunButton';
+import { ChartContainer } from './ChartContainer';
 import { AlgorithmSettings } from './forecastSettings/AlgorithmSettings';
 import { DataSettings } from './forecastSettings/DataSettings';
 import { NetworkSettings } from './forecastSettings/NetworkSettings';
@@ -32,6 +31,15 @@ interface AppState {
     selectedAlgorithm: string;
     algorithmParameters: ParticleSwarmSettingsState | SimulatedAnnealingSettingsState | GeneticSettingsState | ModifiedAntColonySettingsState;
   };
+
+  forecastResult: {
+    initError: number;
+    afterFuzzyLayerInitError: number;
+    afterOptimizationError: number;
+    finalError: number;
+    realValues: number[];
+    forecastValues: number[];
+  };
 }
 
 export class App extends React.Component<{}, AppState> {
@@ -47,8 +55,16 @@ export class App extends React.Component<{}, AppState> {
         selectedAlgorithm: 'sa',
       },
       dataSettings: {
-        fileName: '',
+        fileName: 'gold.txt',
         trainTestDivide: 80,
+      },
+      forecastResult: {
+        afterFuzzyLayerInitError: 0,
+        afterOptimizationError: 0,
+        finalError: 0,
+        forecastValues: [],
+        initError: 0,
+        realValues: [],
       },
       networkSettings: {
         fuzzyLayerSize: 9,
@@ -66,6 +82,7 @@ export class App extends React.Component<{}, AppState> {
     this.handleHiddenLayerSizeRange = this.handleHiddenLayerSizeRange.bind(this);
     this.handleAlgorithmSelect = this.handleAlgorithmSelect.bind(this);
     this.handleAlgorithmParameter = this.handleAlgorithmParameter.bind(this);
+    this.handleForecastResult = this.handleForecastResult.bind(this);
   }
 
   handleFileName(fileName: string) {
@@ -178,8 +195,14 @@ export class App extends React.Component<{}, AppState> {
     });
   }
 
+  handleForecastResult(forecastResult: ForecastResult) {
+    this.setState({
+      forecastResult,
+    });
+  }
+
   render() {
-    const { dataSettings, networkSettings, algorithmSettings } = this.state;
+    const { dataSettings, networkSettings, algorithmSettings, forecastResult } = this.state;
 
     return (
       <SplitPane
@@ -212,13 +235,13 @@ export class App extends React.Component<{}, AppState> {
               {...dataSettings}
               {...networkSettings}
               {...algorithmSettings}
+              handleForecastResult={this.handleForecastResult}
             />
          </>
         }
         right={
           <>
-            <Chart />
-            <ClearChartButton />
+            <ChartContainer {...forecastResult}/>
           </>
         }
       />

@@ -14,6 +14,16 @@ interface RunButtonProps {
   hiddenLayerSize: number;
   selectedAlgorithm: string;
   algorithmParameters: ParticleSwarmSettingsState | SimulatedAnnealingSettingsState | GeneticSettingsState | ModifiedAntColonySettingsState;
+  handleForecastResult: (forecastResult: ForecastResult) => void;
+}
+
+export interface ForecastResult {
+  initError: number;
+  afterFuzzyLayerInitError: number;
+  afterOptimizationError: number;
+  finalError: number;
+  realValues: number[];
+  forecastValues: number[];
 }
 
 export class RunButton extends React.Component<RunButtonProps> {
@@ -37,22 +47,24 @@ export class RunButton extends React.Component<RunButtonProps> {
     } = this.props;
 
     fetch('http://localhost:8080/forecast', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
       body: JSON.stringify({
         fileName,
-        trainTestDivide,
         fuzzyLayerSize,
         hiddenLayerSize,
         inputLayerSize,
-        selectedNetwork,
         selectedAlgorithm,
+        selectedNetwork,
+        trainTestDivide,
         ...algorithmParameters,
-      })
-    }).then((respone) => {
-      console.log(respone);
+      }),
+      headers: {
+        'Content-type': 'application/json',
+      },
+      method: 'POST',
+    }).then((response) => {
+      if (response.ok) {
+        response.json().then(forecastResult => this.props.handleForecastResult(forecastResult));
+      }
     });
   }
 

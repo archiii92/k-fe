@@ -39,7 +39,7 @@ export class SimulatedAnnealingSettings extends React.Component<SimulatedAnneali
             <InputRange
               handleRange={value => this.handleRange('initialTemperature', value)}
               value={initialTemperature}
-              maxValue={500}
+              maxValue={300}
               minValue={1}
               step={10}
             />
