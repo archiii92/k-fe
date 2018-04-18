@@ -6,6 +6,12 @@ import './ChartContainer.css';
 import { ForecastCriterias } from './ForecastCriterias';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
+interface ChartPoint {
+  real: number;
+  forecast: number;
+  name: Date;
+}
+
 export class ChartContainer extends React.Component<ForecastResult> {
   constructor(props: any) {
     super(props);
@@ -18,17 +24,21 @@ export class ChartContainer extends React.Component<ForecastResult> {
   }
 
   render() {
-    const { initError, afterFuzzyLayerInitError, afterOptimizationError, finalError, realValues } = this.props;
+    const { initError, afterFuzzyLayerInitError, afterOptimizationError, finalError, realValues, forecastValues, forecastDates } = this.props;
 
-    const realValuesArray = [
-      {name: 'Page A', uv: 4000, pv: 2400, amt: 2400},
-      {name: 'Page B', uv: 3000, pv: 1398, amt: 2210},
-      {name: 'Page C', uv: 2000, pv: 9800, amt: 2290},
-      {name: 'Page D', uv: 2780, pv: 3908, amt: 2000},
-      {name: 'Page E', uv: 1890, pv: 4800, amt: 2181},
-      {name: 'Page F', uv: 2390, pv: 3800, amt: 2500},
-      {name: 'Page G', uv: 3490, pv: 4300, amt: 2100},
-    ]
+    const realValuesArray: ChartPoint[] = [];
+
+    for(let i = 0; i < realValues.length; i++) {
+      realValuesArray.push({
+        name: forecastDates[i],
+        real: realValues[i],
+        forecast: forecastValues[i],
+      });
+    }
+
+    realValuesArray.sort((a, b) => {
+      return a.name > b.name ? 1 : -1;
+    });
 
     return (
       <>
@@ -39,14 +49,14 @@ export class ChartContainer extends React.Component<ForecastResult> {
           finalError={finalError}
         />
         <div className="chart">
-          <LineChart width={400} height={400} data={realValuesArray}>
-            <XAxis dataKey="name"/>
+          <LineChart width={1200} height={700} data={realValuesArray}>
+            {/* <XAxis dataKey="name"/> */}
             <YAxis/>
             <CartesianGrid strokeDasharray="3 3"/>
-            <Tooltip/>
+            {/* <Tooltip/> */}
             <Legend />
-            <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{r: 8}}/>
-            <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+            <Line type="monotone" dataKey="real" stroke="#8884d8" />
+            <Line type="monotone" dataKey="forecast" stroke="#82ca9d" />
           </LineChart>
         </div>
         <ClearChartButton handleClearChart={this.handleClearChart}/>

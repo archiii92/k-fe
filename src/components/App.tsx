@@ -39,6 +39,7 @@ interface AppState {
     finalError: number;
     realValues: number[];
     forecastValues: number[];
+    forecastDates: Date[];
   };
 }
 
@@ -65,6 +66,7 @@ export class App extends React.Component<{}, AppState> {
         forecastValues: [],
         initError: 0,
         realValues: [],
+        forecastDates: [],
       },
       networkSettings: {
         fuzzyLayerSize: 9,

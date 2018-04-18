@@ -24,6 +24,7 @@ export interface ForecastResult {
   finalError: number;
   realValues: number[];
   forecastValues: number[];
+  forecastDates: Date[];
 }
 
 export class RunButton extends React.Component<RunButtonProps> {
