@@ -71,7 +71,7 @@ export class RunButton extends React.Component<RunButtonProps> {
 
   render() {
     return (
-      <Button title="Начать планирование" handleClick={this.handleRun} />
+      <Button title="Начать прогнозирование" handleClick={this.handleRun} />
     );
   }
 }

@@ -32,7 +32,7 @@ export class NetworkSettings extends React.Component<NetworkSettingsProps, {}> {
       <>
         <div className="form-field">
           <label>
-            Выберите тип нейронной сети:
+            Выберите вид нейронной сети:
             <InputSelect
               handleSelect={handleNetworkSelect}
               initialValue={selectedNetwork}

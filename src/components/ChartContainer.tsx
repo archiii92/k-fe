@@ -52,11 +52,11 @@ export class ChartContainer extends React.Component<ForecastResult> {
           <LineChart width={1200} height={700} data={realValuesArray}>
             {/* <XAxis dataKey="name"/> */}
             <YAxis/>
-            <CartesianGrid strokeDasharray="3 3"/>
+            <CartesianGrid strokeDasharray="1 1"/>
             {/* <Tooltip/> */}
             <Legend />
-            <Line type="monotone" dataKey="real" stroke="#8884d8" />
-            <Line type="monotone" dataKey="forecast" stroke="#82ca9d" />
+            <Line type="monotone" name="Реальное значение" dataKey="real" stroke="green" />
+            <Line type="monotone" name="Спрогнозированное значение" dataKey="forecast" stroke="blue" />
           </LineChart>
         </div>
         <ClearChartButton handleClearChart={this.handleClearChart}/>

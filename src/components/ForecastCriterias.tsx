@@ -20,10 +20,10 @@ export class ForecastCriterias extends React.Component<ForecastCriteriasProps> {
           <div>Ошибка после инициализации нечеткого слоя: {afterFuzzyLayerInitError.toFixed(2)}</div>
         }
         {afterOptimizationError !== 0 &&
-          <div>Ошибка после оптимизации весов скрытого слоя: {afterOptimizationError.toFixed(2)}</div>
+          <div>Ошибка после оптимизации весов скрытого и выходного слоев: {afterOptimizationError.toFixed(2)}</div>
         }
         {finalError !== 0 &&
-          <div>Ошибка после обучения: {finalError.toFixed(2)}</div>
+          <div>Ошибка после обучения сети: {finalError.toFixed(2)}</div>
         }
       </>
     );

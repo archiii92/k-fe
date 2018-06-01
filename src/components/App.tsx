@@ -210,14 +210,14 @@ export class App extends React.Component<{}, AppState> {
       <SplitPane
         left={
           <>
-            <Section color="lavender">
+            <Section color="aliceblue">
               <DataSettings
                 trainTestDivide={dataSettings.trainTestDivide}
                 handleFileName={this.handleFileName}
                 handleTrainTestDivide={this.handleTrainTestDivide}
               />
             </Section>
-            <Section color="oldlace">
+            <Section color="aliceblue">
               <NetworkSettings
                 {...networkSettings}
                 handleNetworkSelect={this.handleNetworkSelect}
